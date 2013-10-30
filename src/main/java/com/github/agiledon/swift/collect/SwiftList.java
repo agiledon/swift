@@ -10,15 +10,16 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public final class SwiftList {
     private SwiftList() {}
+
     public static <E> void foreach(List<E> iterable, Actions<? super E> action) {
         for (E element : iterable) {
             action.apply(element);
         }
     }
 
-    public static <T, F> List<T> map(List<F> iterable, Functions<? super F, ? extends T> function) {
+    public static <T, S> List<T> map(List<S> iterable, Functions<? super S, ? extends T> function) {
         List<T> result = newArrayList();
-        for (F element : iterable) {
+        for (S element : iterable) {
             result.add(function.apply(element));
         }
         return result;
