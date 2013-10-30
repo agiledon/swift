@@ -171,4 +171,32 @@ public class SwiftListTest {
         List<String> result = init(newArrayList("first"));
         assertThat(result.size(), is(0));
     }
+
+    @Test
+    public void should_return_elements_which_match_predicates() {
+        List<String> result = filter(stringList, new Predicates<String>() {
+            @Override
+            public boolean apply(String element) {
+                return element.contains("line");
+            }
+        });
+
+        assertThat(result.size(), is(7));
+        assertThat(head(result), is("first line"));
+        assertThat(last(result), is("seventh line"));
+    }
+
+    @Test
+    public void should_remove_elements_which_match_predicates() {
+        List<String> result = filterNot(stringList, new Predicates<String>() {
+            @Override
+            public boolean apply(String element) {
+                return element.contains("line");
+            }
+        });
+
+        assertThat(result.size(), is(2));
+        assertThat(head(result), is("///"));
+        assertThat(last(result), is("///"));
+    }
 }

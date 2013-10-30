@@ -89,6 +89,26 @@ public final class SwiftList {
         return result;
     }
 
+    public static <E> List<E> filter(List<E> filterFrom, Predicates<E> predicate) {
+        List<E> result = newArrayList();
+        for (E element : filterFrom) {
+            if (predicate.apply(element)) {
+                result.add(element);
+            }
+        }
+        return result;
+    }
+
+    public static <E> List<E> filterNot(List<E> filterFrom, Predicates<E> predicate) {
+        List<E> result = newArrayList();
+        for (E element : filterFrom) {
+            if (!predicate.apply(element)) {
+                result.add(element);
+            }
+        }
+        return result;
+    }
+
     private static <E> void throwExceptionIfOneElement(List<E> list) {
         if (list.size() < 1) {
             throw new ElementNotFoundException();
