@@ -11,9 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.github.agiledon.swift.collect.SwiftList.foreach;
-import static com.github.agiledon.swift.collect.SwiftList.map;
-import static com.github.agiledon.swift.collect.SwiftList.partition;
+import static com.github.agiledon.swift.collect.SwiftList.*;
 import static com.google.common.collect.Lists.newArrayList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -110,5 +108,37 @@ public class SwiftListTest {
         for (int index = 0; index < multiByTwo.size(); index++) {
             assertThat(multiByTwo.get(index), is(String.valueOf(index)));
         }
+    }
+
+    @Test
+    public void should_take_preceding_elements() {
+        List<String> result = take(stringList, 3);
+
+        assertThat(result.size(), is(3));
+        assertThat(result.get(0), is("first line"));
+        assertThat(result.get(1), is("second line"));
+        assertThat(result.get(2), is("///"));
+    }
+
+    @Test
+    public void should_take_all_elments_if_count_greater_than_size() {
+        List<String> result = take(stringList, 10);
+        assertThat(result.size(), is(stringList.size()));
+    }
+
+    @Test
+    public void should_drop_preceding_elements() {
+        List<String> result = drop(stringList, 3);
+
+        assertThat(result.size(), is(6));
+        assertThat(result.get(0), is("third line"));
+        assertThat(result.get(1), is("fourth line"));
+        assertThat(result.get(5), is("seventh line"));
+    }
+
+    @Test
+    public void should_drop_all_elements_if_count_greater_than_size() {
+        List<String> result = drop(stringList, 10);
+        assertThat(result.size(), is(0));
     }
 }

@@ -25,6 +25,26 @@ public final class SwiftList {
         return result;
     }
 
+    public static <E> List<E> take(List<E> list, int count) {
+        List<E> result = newArrayList();
+        for (int i = 0; i < list.size(); i++) {
+            if (i < count) {
+                result.add(list.get(i));
+            }
+        }
+        return result;
+    }
+
+    public static <E> List<E> drop(List<E> list, int count) {
+        List<E> result = newArrayList();
+        for (int i = 0; i < list.size(); i++) {
+            if (i >= count) {
+                result.add(list.get(i));
+            }
+        }
+        return result;
+    }
+
     public static <E> List<List<E>> partition(List<E> partitionFrom, Predicates<? super E> predicates) {
         List<List<E>> result = newArrayList();
         List<E> elementList = newArrayList();
