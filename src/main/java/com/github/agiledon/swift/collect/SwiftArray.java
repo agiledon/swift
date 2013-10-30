@@ -6,18 +6,18 @@ import com.github.agiledon.swift.base.BinaryPredicates;
 public final class SwiftArray {
     private SwiftArray() {}
 
-    public static <E> void foreach(E[] iterable, Actions<E> action) {
-        for (E element : iterable) {
+    public static <E> void foreach(E[] array, Actions<E> action) {
+        for (E element : array) {
             action.apply(element);
         }
     }
 
-    public static <E> boolean corresponds(E[] first, E[] second, BinaryPredicates<E> predicates) {
-        if (first.length != second.length) {
+    public static <E> boolean corresponds(E[] source, E[] target, BinaryPredicates<E> predicates) {
+        if (source.length != target.length) {
             return false;
         }
-        for (int index = 0; index < first.length; index++) {
-            if (!predicates.apply(first[index], second[index])) {
+        for (int index = 0; index < source.length; index++) {
+            if (!predicates.apply(source[index], target[index])) {
                  return false;
             }
         }

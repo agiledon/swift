@@ -11,15 +11,15 @@ import static com.google.common.collect.Lists.newArrayList;
 public final class SwiftList {
     private SwiftList() {}
 
-    public static <E> void foreach(List<E> iterable, Actions<? super E> action) {
-        for (E element : iterable) {
+    public static <E> void foreach(List<E> list, Actions<? super E> action) {
+        for (E element : list) {
             action.apply(element);
         }
     }
 
-    public static <T, S> List<T> map(List<S> iterable, Functions<? super S, ? extends T> function) {
+    public static <T, S> List<T> map(List<S> list, Functions<? super S, ? extends T> function) {
         List<T> result = newArrayList();
-        for (S element : iterable) {
+        for (S element : list) {
             result.add(function.apply(element));
         }
         return result;
