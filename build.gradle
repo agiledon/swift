@@ -17,6 +17,7 @@ project.ext {
     guavaVersion = '15.0'
     slf4jVersion = '1.7.5'
     junitVersion = '4.11'
+    mockitoVersion = '1.9.5'
 }
 
 dependencies {
@@ -26,7 +27,8 @@ dependencies {
     )
 
     testCompile(
-            "junit:junit:$junitVersion"
+            "junit:junit:$junitVersion",
+            "org.mockito:mockito-all:$mockitoVersion"
     )
 }
 
