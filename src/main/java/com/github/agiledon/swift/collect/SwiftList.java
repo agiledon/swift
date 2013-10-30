@@ -3,6 +3,7 @@ package com.github.agiledon.swift.collect;
 import com.github.agiledon.swift.base.Actions;
 import com.github.agiledon.swift.base.Functions;
 import com.github.agiledon.swift.base.Predicates;
+import com.github.agiledon.swift.exception.ElementNotFoundException;
 
 import java.util.List;
 
@@ -59,6 +60,44 @@ public final class SwiftList {
         }
         if (elementList.size() > 0) {
             result.add(elementList);
+        }
+        return result;
+    }
+
+    public static <E> E head(List<E> list) {
+        moreThanOneElement(list);
+        return list.get(0);
+    }
+
+    public static <E> E last(List<E> list) {
+        moreThanOneElement(list);
+        return list.get(list.size() - 1);
+    }
+
+    private static <E> void moreThanOneElement(List<E> list) {
+        if (list.size() < 1) {
+            throw new ElementNotFoundException();
+        }
+    }
+
+    public static <E> List<E> tail(List<E> list) {
+        if (list.size() < 2) {
+            return newArrayList();
+        }
+        List<E> result = newArrayList();
+        for (int i = 1; i < list.size(); i++) {
+            result.add(list.get(i));
+        }
+        return result;
+    }
+
+    public static <E> List<E> init(List<E> list) {
+        if (list.size() < 2) {
+            return newArrayList();
+        }
+        List<E> result = newArrayList();
+        for (int i = 0; i < list.size() - 1; i++) {
+            result.add(list.get(i));
         }
         return result;
     }

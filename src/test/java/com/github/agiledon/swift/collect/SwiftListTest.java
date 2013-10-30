@@ -3,6 +3,7 @@ package com.github.agiledon.swift.collect;
 import com.github.agiledon.swift.base.Actions;
 import com.github.agiledon.swift.base.Functions;
 import com.github.agiledon.swift.base.Predicates;
+import com.github.agiledon.swift.exception.ElementNotFoundException;
 import com.github.agiledon.swift.mockobject.Printer;
 import org.junit.Before;
 import org.junit.Test;
@@ -139,6 +140,56 @@ public class SwiftListTest {
     @Test
     public void should_drop_all_elements_if_count_greater_than_size() {
         List<String> result = drop(stringList, 10);
+        assertThat(result.size(), is(0));
+    }
+
+    @Test
+    public void should_return_first_element() {
+        String result = head(stringList);
+        assertThat(result, is("first line"));
+    }
+
+    @Test(expected = ElementNotFoundException.class)
+    public void should_throw_ElementNotFoundException_if_target_list_is_empty_for_head() {
+        head(newArrayList());
+    }
+
+    @Test
+    public void should_return_last_element() {
+        String result = last(stringList);
+        assertThat(result, is("seventh line"));
+    }
+
+    @Test(expected = ElementNotFoundException.class)
+    public void should_throw_ElementNotFoundException_if_target_list_is_empty_for_last() {
+        last(newArrayList());
+    }
+
+    @Test
+    public void should_return_all_elements_except_first_one() {
+        List<String> result = tail(stringList);
+        assertThat(result.size(), is(8));
+        assertThat(head(result), is("second line"));
+        assertThat(last(result), is("seventh line"));
+    }
+
+    @Test
+    public void should_return_empty_list_if_size_of_target_list_less_than_two_for_tail() {
+        List<String> result = tail(newArrayList("first"));
+        assertThat(result.size(), is(0));
+    }
+
+    @Test
+    public void should_return_all_elements_except_last_one() {
+        List<String> result = init(stringList);
+        assertThat(result.size(), is(8));
+        assertThat(head(result), is("first line"));
+        assertThat(last(result), is("sixth line"));
+    }
+
+    @Test
+    public void should_return_empty_list_if_size_of_target_list_less_than_two_for_init() {
+        List<String> result = init(newArrayList("first"));
         assertThat(result.size(), is(0));
     }
 }
