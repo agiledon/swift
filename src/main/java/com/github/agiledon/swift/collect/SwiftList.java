@@ -1,6 +1,5 @@
 package com.github.agiledon.swift.collect;
 
-import com.github.agiledon.swift.base.Actions;
 import com.github.agiledon.swift.base.Functions;
 import com.github.agiledon.swift.base.Predicates;
 import com.github.agiledon.swift.exception.ElementNotFoundException;
@@ -11,12 +10,6 @@ import static com.google.common.collect.Lists.newArrayList;
 
 public final class SwiftList {
     private SwiftList() {}
-
-    public static <E> void foreach(List<E> list, Actions<? super E> action) {
-        for (E element : list) {
-            action.apply(element);
-        }
-    }
 
     public static <T, S> List<T> map(List<S> list, Functions<? super S, ? extends T> function) {
         List<T> result = newArrayList();
@@ -65,19 +58,13 @@ public final class SwiftList {
     }
 
     public static <E> E head(List<E> list) {
-        moreThanOneElement(list);
+        throwExceptionIfOneElement(list);
         return list.get(0);
     }
 
     public static <E> E last(List<E> list) {
-        moreThanOneElement(list);
+        throwExceptionIfOneElement(list);
         return list.get(list.size() - 1);
-    }
-
-    private static <E> void moreThanOneElement(List<E> list) {
-        if (list.size() < 1) {
-            throw new ElementNotFoundException();
-        }
     }
 
     public static <E> List<E> tail(List<E> list) {
@@ -100,5 +87,11 @@ public final class SwiftList {
             result.add(list.get(i));
         }
         return result;
+    }
+
+    private static <E> void throwExceptionIfOneElement(List<E> list) {
+        if (list.size() < 1) {
+            throw new ElementNotFoundException();
+        }
     }
 }
