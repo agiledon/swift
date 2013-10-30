@@ -1,5 +1,5 @@
 package com.github.agiledon.swift.base;
 
-public interface Functions<F, T> {
-    T apply(F f);
+public interface Functions<Source, Target> {
+    Target apply(Source source);
 }
