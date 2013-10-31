@@ -78,6 +78,11 @@ public final class SwiftList {
         return ConvertingList.copyToArray(list, start, length);
     }
 
+    public static <E> boolean exists(List<E> list, Predicates<? super E> predicates) {
+        return QueryList.exists(list, predicates);
+    }
+
+
     public static <E> ArrayList<E> arrayList() {
         return ArrayListFactory.createArrayList();
     }
