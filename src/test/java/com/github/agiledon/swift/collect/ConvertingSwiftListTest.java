@@ -43,4 +43,10 @@ public class ConvertingSwiftListTest {
         assertThat(result[0], is("second line"));
         assertThat(result[result.length - 1], is("seventh line"));
     }
+
+    @Test
+    public void should_copy_to_empty_array_if_begin_index_greater_than_length() {
+        String[] result = copyToArray(stringList, 10, 5);
+        assertThat(result.length, is(0));
+    }
 }
