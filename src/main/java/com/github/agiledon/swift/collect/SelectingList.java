@@ -5,11 +5,13 @@ import com.github.agiledon.swift.exception.ElementNotFoundException;
 
 import java.util.List;
 
+import static com.github.agiledon.swift.collect.SwiftList.arrayList;
+
 final class SelectingList {
     private SelectingList() {}
 
     static <E> List<E> take(List<E> list, int length) {
-        List<E> result = SwiftList.arrayList();
+        List<E> result = arrayList();
         for (int i = 0; i < list.size(); i++) {
             if (i < length) {
                 result.add(list.get(i));
@@ -18,8 +20,18 @@ final class SelectingList {
         return result;
     }
 
+    public static <E> List<E> take(List<E> list, int start, int length) {
+        List<E> result = arrayList();
+        int realStart = start - 1;
+        int end = realStart + length <= list.size() ? realStart + length : list.size();
+        for (int i = realStart; i < end; i++) {
+            result.add(list.get(i));
+        }
+        return result;
+    }
+
     static <E> List<E> takeRight(List<E> list, int rightLength) {
-        List<E> result = SwiftList.arrayList();
+        List<E> result = arrayList();
         int value = list.size() - rightLength;
         int beginIndex = value >= 0 ? value : 0;
         for (; beginIndex < list.size(); beginIndex++) {
@@ -29,7 +41,7 @@ final class SelectingList {
     }
 
     static <E> List<E> takeWhile(List<E> list, Predicates<? super E> predicates) {
-        List<E> result = SwiftList.arrayList();
+        List<E> result = arrayList();
         for (E element : list) {
             if (predicates.apply(element)) {
                 break;
@@ -40,7 +52,7 @@ final class SelectingList {
     }
 
     static <E> List<E> drop(List<E> list, int length) {
-        List<E> result = SwiftList.arrayList();
+        List<E> result = arrayList();
         for (int i = 0; i < list.size(); i++) {
             if (i >= length) {
                 result.add(list.get(i));
@@ -50,7 +62,7 @@ final class SelectingList {
     }
 
     static <E> List<E> dropRight(List<E> list, int rightLength) {
-        List<E> result = SwiftList.arrayList();
+        List<E> result = arrayList();
         if (rightLength >= list.size()) {
             return result;
         }
@@ -63,7 +75,7 @@ final class SelectingList {
     }
 
     static <E> List<E> dropWhile(List<E> list, Predicates<? super E> predicates) {
-        List<E> result = SwiftList.arrayList();
+        List<E> result = arrayList();
         boolean startFlag = false;
         for (E element : list) {
             if (predicates.apply(element)) {
@@ -94,9 +106,9 @@ final class SelectingList {
 
     static <E> List<E> tail(List<E> list) {
         if (list.size() < 2) {
-            return SwiftList.arrayList();
+            return arrayList();
         }
-        List<E> result = SwiftList.arrayList();
+        List<E> result = arrayList();
         for (int i = 1; i < list.size(); i++) {
             result.add(list.get(i));
         }
@@ -105,9 +117,9 @@ final class SelectingList {
 
     static <E> List<E> init(List<E> list) {
         if (list.size() < 2) {
-            return SwiftList.arrayList();
+            return arrayList();
         }
-        List<E> result = SwiftList.arrayList();
+        List<E> result = arrayList();
         for (int i = 0; i < list.size() - 1; i++) {
             result.add(list.get(i));
         }
@@ -115,7 +127,7 @@ final class SelectingList {
     }
 
     static <E> List<E> filter(List<E> filterFrom, Predicates<? super E> predicates) {
-        List<E> result = SwiftList.arrayList();
+        List<E> result = arrayList();
         for (E element : filterFrom) {
             if (predicates.apply(element)) {
                 result.add(element);
@@ -125,7 +137,7 @@ final class SelectingList {
     }
 
     static <E> List<E> filterNot(List<E> filterFrom, Predicates<? super E> predicates) {
-        List<E> result = SwiftList.arrayList();
+        List<E> result = arrayList();
         for (E element : filterFrom) {
             if (!predicates.apply(element)) {
                 result.add(element);

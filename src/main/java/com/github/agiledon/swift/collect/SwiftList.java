@@ -18,6 +18,10 @@ public final class SwiftList {
         return SelectingList.take(list, length);
     }
 
+    public static <E> List<E> take(List<E> list, int start, int length) {
+        return SelectingList.take(list, start, length);
+    }
+
     public static <E> List<E> takeRight(List<E> list, int rightLength) {
         return SelectingList.takeRight(list, rightLength);
     }
@@ -70,6 +74,10 @@ public final class SwiftList {
         return PartitionList.partition(partitionFrom, predicates);
     }
 
+    public static <E> E[] copyToArray(List<E> list, int start, int length) {
+        return ConvertingList.copyToArray(list, start, length);
+    }
+
     public static <E> ArrayList<E> arrayList() {
         return ArrayListFactory.createArrayList();
     }
@@ -77,5 +85,4 @@ public final class SwiftList {
     public static <E> ArrayList<E> arrayList(E... elements) {
         return ArrayListFactory.createArrayList(elements);
     }
-
 }

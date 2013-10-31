@@ -28,7 +28,6 @@ public class SelectingSwiftListTest {
                 "sixth line",
                 "seventh line"
         );
-
     }
 
     @Test
@@ -65,6 +64,14 @@ public class SelectingSwiftListTest {
     public void should_select_all_elements_if_given_right_length_greater_than_size() {
         List<String> result = takeRight(stringList, 10);
         assertThat(result.size(), is(9));
+    }
+
+    @Test
+    public void should_select_specific_elements_begin_with_second_element() {
+        List<String> result = take(stringList, 2, 5);
+        assertThat(result.size(), is(5));
+        assertThat(head(result), is("second line"));
+        assertThat(last(result), is("fifth line"));
     }
 
     @Test
