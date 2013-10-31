@@ -28,10 +28,10 @@ final class SelectingList {
         return result;
     }
 
-    static <E> List<E> takeWhile(List<E> list, Predicates<E> predicate) {
+    static <E> List<E> takeWhile(List<E> list, Predicates<? super E> predicates) {
         List<E> result = SwiftList.newArrayList();
         for (E element : list) {
-            if (predicate.apply(element)) {
+            if (predicates.apply(element)) {
                 break;
             }
             result.add(element);
@@ -62,11 +62,11 @@ final class SelectingList {
         return result;
     }
 
-    static <E> List<E> dropWhile(List<E> list, Predicates<E> predicate) {
+    static <E> List<E> dropWhile(List<E> list, Predicates<? super E> predicates) {
         List<E> result = SwiftList.newArrayList();
         boolean startFlag = false;
         for (E element : list) {
-            if (predicate.apply(element)) {
+            if (predicates.apply(element)) {
                 startFlag = true;
             }
             if (startFlag) {
@@ -114,20 +114,20 @@ final class SelectingList {
         return result;
     }
 
-    static <E> List<E> filter(List<E> filterFrom, Predicates<E> predicate) {
+    static <E> List<E> filter(List<E> filterFrom, Predicates<? super E> predicates) {
         List<E> result = SwiftList.newArrayList();
         for (E element : filterFrom) {
-            if (predicate.apply(element)) {
+            if (predicates.apply(element)) {
                 result.add(element);
             }
         }
         return result;
     }
 
-    static <E> List<E> filterNot(List<E> filterFrom, Predicates<E> predicate) {
+    static <E> List<E> filterNot(List<E> filterFrom, Predicates<? super E> predicates) {
         List<E> result = SwiftList.newArrayList();
         for (E element : filterFrom) {
-            if (!predicate.apply(element)) {
+            if (!predicates.apply(element)) {
                 result.add(element);
             }
         }

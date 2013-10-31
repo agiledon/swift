@@ -6,8 +6,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static com.github.agiledon.swift.collect.SwiftList.newArrayList;
-import static com.github.agiledon.swift.collect.SwiftList.split;
+import static com.github.agiledon.swift.collect.SwiftList.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -27,21 +26,43 @@ public class PartitionSwiftListTest {
                 "sixth line",
                 "seventh line"
         );
-
     }
 
     @Test
     public void should_split_list_to_multi_parts_according_to_a_predicate() {
-        List<List<String>> partitions = split(stringList, new Predicates<String>() {
+        List<List<String>> result = split(stringList, new Predicates<String>() {
             @Override
             public boolean apply(String element) {
                 return element.trim().startsWith("///");
             }
         });
 
-        assertThat(partitions.size(), is(3));
-        assertThat(partitions.get(0).get(0), is("first line"));
-        assertThat(partitions.get(1).get(0), is("third line"));
-        assertThat(partitions.get(2).get(0), is("sixth line"));
+        assertThat(result.size(), is(3));
+        assertThat(head(head(result)), is("first line"));
+        assertThat(last(head(result)), is("second line"));
+        assertThat(head(last(result)), is("sixth line"));
+        assertThat(last(last(result)), is("seventh line"));
+    }
+
+    @Test
+    public void should_partition_list_in_two_lists_according_to_a_predicate() {
+        List<List<String>> result = partition(stringList, new Predicates<String>() {
+            @Override
+            public boolean apply(String element) {
+                return element.trim().startsWith("///");
+            }
+        });
+
+        assertThat(result.size(), is(2));
+
+        List<String> firstPart = head(result);
+        assertThat(firstPart.size(), is(2));
+        assertThat(head(firstPart), is("first line"));
+        assertThat(last(firstPart), is("second line"));
+
+        List<String> secondPart = last(result);
+        assertThat(secondPart.size(), is(7));
+        assertThat(head(secondPart), is("///"));
+        assertThat(last(secondPart), is("seventh line"));
     }
 }
