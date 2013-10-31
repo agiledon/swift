@@ -100,6 +100,20 @@ public class SwiftListTest {
     }
 
     @Test
+    public void should_take_longest_prefix_of_elements_that_satisfy_a_predicate() {
+        List<String> result = takeWhile(stringList, new Predicates<String>() {
+            @Override
+            public boolean apply(String element) {
+                return element.trim().equals("///");
+            }
+        });
+
+        assertThat(result.size(), is(2));
+        assertThat(head(result), is("first line"));
+        assertThat(last(result), is("second line"));
+    }
+
+    @Test
     public void should_take_all_elements_if_count_greater_than_size() {
         List<String> result = take(stringList, 10);
         assertThat(result.size(), is(stringList.size()));
@@ -147,6 +161,32 @@ public class SwiftListTest {
         assertThat(result.size(), is(4));
         assertThat(head(result), is("first line"));
         assertThat(last(result), is("third line"));
+    }
+
+    @Test
+    public void should_drop_longest_prefix_of_elements_that_satisfy_a_predicate() {
+        List<String> result = dropWhile(stringList, new Predicates<String>() {
+            @Override
+            public boolean apply(String element) {
+                return element.trim().equals("///");
+            }
+        });
+
+        assertThat(result.size(), is(7));
+        assertThat(head(result), is("///"));
+        assertThat(last(result), is("seventh line"));
+    }
+
+    @Test
+    public void should_drop_all_elements_that_not_satisfy_a_predicate() {
+        List<String> result = dropWhile(stringList, new Predicates<String>() {
+            @Override
+            public boolean apply(String element) {
+                return element.trim().equals("bla bla");
+            }
+        });
+
+        assertThat(result.size(), is(0));
     }
 
     @Test

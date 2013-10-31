@@ -39,6 +39,17 @@ public final class SwiftList {
         return result;
     }
 
+    public static <E> List<E> takeWhile(List<E> list, Predicates<E> predicate) {
+        List<E> result = newArrayList();
+        for (E element : list) {
+            if (predicate.apply(element)) {
+                break;
+            }
+            result.add(element);
+        }
+        return result;
+    }
+
     public static <E> List<E> drop(List<E> list, int length) {
         List<E> result = newArrayList();
         for (int i = 0; i < list.size(); i++) {
@@ -59,6 +70,20 @@ public final class SwiftList {
             result.add(list.get(i));
         }
 
+        return result;
+    }
+
+    public static <E> List<E> dropWhile(List<E> list, Predicates<E> predicate) {
+        List<E> result = newArrayList();
+        boolean startFlag = false;
+        for (E element : list) {
+            if (predicate.apply(element)) {
+                startFlag = true;
+            }
+            if (startFlag) {
+                result.add(element);
+            }
+        }
         return result;
     }
 
@@ -132,12 +157,6 @@ public final class SwiftList {
         return result;
     }
 
-    private static <E> void throwExceptionIfOneElement(List<E> list) {
-        if (list.size() < 1) {
-            throw new ElementNotFoundException();
-        }
-    }
-
     public static <E> ArrayList<E> newArrayList() {
         return new ArrayList<E>();
     }
@@ -148,5 +167,11 @@ public final class SwiftList {
             result.add(element);
         }
         return result;
+    }
+
+    private static <E> void throwExceptionIfOneElement(List<E> list) {
+        if (list.size() < 1) {
+            throw new ElementNotFoundException();
+        }
     }
 }
