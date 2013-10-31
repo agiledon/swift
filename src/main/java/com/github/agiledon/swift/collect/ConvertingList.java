@@ -8,6 +8,14 @@ final class ConvertingList {
     private ConvertingList() {}
 
     static <E> E[] copyToArray(List<E> list, int start, int length) {
-        return (E[]) take(list, start, length).toArray();
+        List<E> partList = take(list, start, length);
+        E[] result = (E[]) java.lang.reflect.Array.newInstance(partList.get(0)
+                .getClass(), partList.size());
+
+        for (int i = 0; i < partList.size(); i++) {
+            result[i] = partList.get(i);
+        }
+
+        return result;
     }
 }
