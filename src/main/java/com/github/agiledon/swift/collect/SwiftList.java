@@ -4,12 +4,12 @@ import com.github.agiledon.swift.base.Functions;
 import com.github.agiledon.swift.base.Predicates;
 import com.github.agiledon.swift.exception.ElementNotFoundException;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import static com.google.common.collect.Lists.newArrayList;
-
 public final class SwiftList {
-    private SwiftList() {}
+    private SwiftList() {
+    }
 
     public static <T, S> List<T> map(List<S> list, Functions<? super S, ? extends T> function) {
         List<T> result = newArrayList();
@@ -136,5 +136,17 @@ public final class SwiftList {
         if (list.size() < 1) {
             throw new ElementNotFoundException();
         }
+    }
+
+    public static <E> ArrayList<E> newArrayList() {
+        return new ArrayList<E>();
+    }
+
+    public static <E> ArrayList<E> newArrayList(E... elements) {
+        ArrayList<E> result = newArrayList();
+        for (E element : elements) {
+            result.add(element);
+        }
+        return result;
     }
 }

@@ -14,7 +14,6 @@ repositories {
 }
 
 project.ext {
-    guavaVersion = '15.0'
     slf4jVersion = '1.7.5'
     junitVersion = '4.11'
     mockitoVersion = '1.9.5'
@@ -22,7 +21,6 @@ project.ext {
 
 dependencies {
     compile(
-            "com.google.guava:guava:$guavaVersion",
             "org.slf4j:slf4j-api:$slf4jVersion"
     )
 
