@@ -101,9 +101,29 @@ public class SwiftListTest {
     }
 
     @Test
-    public void should_take_all_elments_if_count_greater_than_size() {
+    public void should_take_all_elements_if_count_greater_than_size() {
         List<String> result = take(stringList, 10);
         assertThat(result.size(), is(stringList.size()));
+    }
+
+    @Test
+    public void should_take_right_elements() {
+        List<String> result = takeRight(stringList, 5);
+        assertThat(result.size(), is(5));
+        assertThat(head(result), is("fourth line"));
+        assertThat(last(result), is("seventh line"));
+    }
+
+    @Test
+    public void should_take_zero_element() {
+        List<String> result = takeRight(stringList, 0);
+        assertThat(result.size(), is(0));
+    }
+
+    @Test
+    public void should_take_all_elements_if_given_length_greater_than_size() {
+        List<String> result = takeRight(stringList, 10);
+        assertThat(result.size(), is(9));
     }
 
     @Test
@@ -120,6 +140,14 @@ public class SwiftListTest {
     public void should_drop_all_elements_if_count_greater_than_size() {
         List<String> result = drop(stringList, 10);
         assertThat(result.size(), is(0));
+    }
+
+    @Test
+    public void should_drop_right_elements() {
+        List<String> result = dropRight(stringList, 5);
+        assertThat(result.size(), is(4));
+        assertThat(head(result), is("first line"));
+        assertThat(last(result), is("third line"));
     }
 
     @Test

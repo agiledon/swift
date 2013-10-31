@@ -19,23 +19,46 @@ public final class SwiftList {
         return result;
     }
 
-    public static <E> List<E> take(List<E> list, int count) {
+    public static <E> List<E> take(List<E> list, int length) {
         List<E> result = newArrayList();
         for (int i = 0; i < list.size(); i++) {
-            if (i < count) {
+            if (i < length) {
                 result.add(list.get(i));
             }
         }
         return result;
     }
 
-    public static <E> List<E> drop(List<E> list, int count) {
+    public static <E> List<E> takeRight(List<E> list, int rightLength) {
+        List<E> result = newArrayList();
+        int value = list.size() - rightLength;
+        int beginIndex = value >= 0 ? value : 0;
+        for (; beginIndex < list.size(); beginIndex++) {
+            result.add(list.get(beginIndex));
+        }
+        return result;
+    }
+
+    public static <E> List<E> drop(List<E> list, int length) {
         List<E> result = newArrayList();
         for (int i = 0; i < list.size(); i++) {
-            if (i >= count) {
+            if (i >= length) {
                 result.add(list.get(i));
             }
         }
+        return result;
+    }
+
+    public static <E> List<E> dropRight(List<E> list, int rightLength) {
+        List<E> result = newArrayList();
+        if (rightLength >= list.size()) {
+            return result;
+        }
+
+        for (int i = 0; i < list.size() - rightLength; i++) {
+            result.add(list.get(i));
+        }
+
         return result;
     }
 
