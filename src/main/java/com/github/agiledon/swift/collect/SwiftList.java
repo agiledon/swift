@@ -11,11 +11,7 @@ public final class SwiftList {
     }
 
     public static <T, S> List<T> map(List<S> list, Functions<? super S, ? extends T> function) {
-        List<T> result = newArrayList();
-        for (S element : list) {
-            result.add(function.apply(element));
-        }
-        return result;
+        return TransformingList.transform(list, function);
     }
 
     public static <E> List<E> take(List<E> list, int length) {
@@ -67,33 +63,15 @@ public final class SwiftList {
     }
 
     public static <E> List<List<E>> split(List<E> partitionFrom, Predicates<? super E> predicates) {
-        List<List<E>> result = newArrayList();
-        List<E> elementList = newArrayList();
-
-        for (E element : partitionFrom) {
-            if (predicates.apply(element)) {
-                result.add(elementList);
-                elementList = newArrayList();
-            } else {
-                elementList.add(element);
-            }
-        }
-        if (elementList.size() > 0) {
-            result.add(elementList);
-        }
-        return result;
+        return PartitionList.split(partitionFrom, predicates);
     }
 
     public static <E> ArrayList<E> newArrayList() {
-        return new ArrayList<E>();
+        return ArrayListFactory.createArrayList();
     }
 
     public static <E> ArrayList<E> newArrayList(E... elements) {
-        ArrayList<E> result = newArrayList();
-        for (E element : elements) {
-            result.add(element);
-        }
-        return result;
+        return ArrayListFactory.createArrayList(elements);
     }
 
 }

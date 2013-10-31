@@ -5,15 +5,14 @@ import com.github.agiledon.swift.exception.ElementNotFoundException;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static com.github.agiledon.swift.collect.SelectingList.*;
 import static com.github.agiledon.swift.collect.SwiftList.newArrayList;
+import static com.github.agiledon.swift.collect.SwiftList.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class SelectingListTest {
+public class SelectingSwiftListTest {
     private List<String> stringList;
 
     @Before

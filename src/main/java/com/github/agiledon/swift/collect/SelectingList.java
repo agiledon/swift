@@ -6,6 +6,7 @@ import com.github.agiledon.swift.exception.ElementNotFoundException;
 import java.util.List;
 
 final class SelectingList {
+    private SelectingList() {}
 
     static <E> List<E> take(List<E> list, int length) {
         List<E> result = SwiftList.newArrayList();
