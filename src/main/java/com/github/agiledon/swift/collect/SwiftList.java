@@ -87,7 +87,7 @@ public final class SwiftList {
         return result;
     }
 
-    public static <E> List<List<E>> partition(List<E> partitionFrom, Predicates<? super E> predicates) {
+    public static <E> List<List<E>> split(List<E> partitionFrom, Predicates<? super E> predicates) {
         List<List<E>> result = newArrayList();
         List<E> elementList = newArrayList();
 

@@ -34,7 +34,7 @@ public class SwiftArrayTest {
     }
 
     @Test
-    public void should_iterate_list_and_do_some_action() {
+    public void should_apply_an_action_to_all_elements() {
         final Printer printer = mock(Printer.class);
 
         foreach(stringArray, new Actions<String>() {

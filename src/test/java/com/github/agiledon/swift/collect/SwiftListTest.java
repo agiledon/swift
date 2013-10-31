@@ -42,9 +42,8 @@ public class SwiftListTest {
     }
 
     @Test
-    public void should_split_to_three_partitions_by_given_predicates() {
-
-        List<List<String>> partitions = partition(stringList, new Predicates<String>() {
+    public void should_split_list_to_multi_parts_according_to_a_predicate() {
+        List<List<String>> partitions = split(stringList, new Predicates<String>() {
             @Override
             public boolean apply(String element) {
                 return element.trim().startsWith("///");
@@ -58,7 +57,7 @@ public class SwiftListTest {
     }
 
     @Test
-    public void should_map_to_another_int_list() {
+    public void should_build_a_new_list_by_applying_a_function_to_all_elements() {
         List<Integer> multiByTwo = map(intList, new Functions<Integer, Integer>() {
             @Override
             public Integer apply(Integer target) {
@@ -74,7 +73,7 @@ public class SwiftListTest {
     }
 
     @Test
-    public void should_map_to_string_list() {
+    public void should_build_a_new_string_list_by_applying_a_function_to_all_elements_of_int_list() {
         List<String> multiByTwo = map(intList, new Functions<Integer, String>() {
             @Override
             public String apply(Integer target) {
@@ -90,13 +89,39 @@ public class SwiftListTest {
     }
 
     @Test
-    public void should_take_preceding_elements() {
+    public void should_select_first_three_elements() {
         List<String> result = take(stringList, 3);
 
         assertThat(result.size(), is(3));
         assertThat(result.get(0), is("first line"));
         assertThat(result.get(1), is("second line"));
         assertThat(result.get(2), is("///"));
+    }
+
+    @Test
+    public void should_select_all_elements_if_given_length_greater_than_size() {
+        List<String> result = take(stringList, 10);
+        assertThat(result.size(), is(stringList.size()));
+    }
+
+    @Test
+    public void should_select_last_five_elements() {
+        List<String> result = takeRight(stringList, 5);
+        assertThat(result.size(), is(5));
+        assertThat(head(result), is("fourth line"));
+        assertThat(last(result), is("seventh line"));
+    }
+
+    @Test
+    public void should_select_zero_element() {
+        List<String> result = takeRight(stringList, 0);
+        assertThat(result.size(), is(0));
+    }
+
+    @Test
+    public void should_select_all_elements_if_given_right_length_greater_than_size() {
+        List<String> result = takeRight(stringList, 10);
+        assertThat(result.size(), is(9));
     }
 
     @Test
@@ -114,33 +139,7 @@ public class SwiftListTest {
     }
 
     @Test
-    public void should_take_all_elements_if_count_greater_than_size() {
-        List<String> result = take(stringList, 10);
-        assertThat(result.size(), is(stringList.size()));
-    }
-
-    @Test
-    public void should_take_right_elements() {
-        List<String> result = takeRight(stringList, 5);
-        assertThat(result.size(), is(5));
-        assertThat(head(result), is("fourth line"));
-        assertThat(last(result), is("seventh line"));
-    }
-
-    @Test
-    public void should_take_zero_element() {
-        List<String> result = takeRight(stringList, 0);
-        assertThat(result.size(), is(0));
-    }
-
-    @Test
-    public void should_take_all_elements_if_given_length_greater_than_size() {
-        List<String> result = takeRight(stringList, 10);
-        assertThat(result.size(), is(9));
-    }
-
-    @Test
-    public void should_drop_preceding_elements() {
+    public void should_select_all_elements_except_first_three_ones() {
         List<String> result = drop(stringList, 3);
 
         assertThat(result.size(), is(6));
@@ -150,13 +149,13 @@ public class SwiftListTest {
     }
 
     @Test
-    public void should_drop_all_elements_if_count_greater_than_size() {
+    public void should_select_empty_elements_if_given_length_greater_than_size() {
         List<String> result = drop(stringList, 10);
         assertThat(result.size(), is(0));
     }
 
     @Test
-    public void should_drop_right_elements() {
+    public void should_select_all_elements_except_last_five_ones() {
         List<String> result = dropRight(stringList, 5);
         assertThat(result.size(), is(4));
         assertThat(head(result), is("first line"));
@@ -190,7 +189,7 @@ public class SwiftListTest {
     }
 
     @Test
-    public void should_return_first_element() {
+    public void should_select_the_first_element() {
         String result = head(stringList);
         assertThat(result, is("first line"));
     }
@@ -201,7 +200,7 @@ public class SwiftListTest {
     }
 
     @Test
-    public void should_return_last_element() {
+    public void should_select_the_last_element() {
         String result = last(stringList);
         assertThat(result, is("seventh line"));
     }
@@ -212,7 +211,7 @@ public class SwiftListTest {
     }
 
     @Test
-    public void should_return_all_elements_except_first_one() {
+    public void should_select_all_elements_except_the_first() {
         List<String> result = tail(stringList);
         assertThat(result.size(), is(8));
         assertThat(head(result), is("second line"));
@@ -220,13 +219,13 @@ public class SwiftListTest {
     }
 
     @Test
-    public void should_return_empty_list_if_size_of_target_list_less_than_two_for_tail() {
+    public void should_select_empty_list_if_size_of_target_list_less_than_two_for_tail() {
         List<String> result = tail(newArrayList("first"));
         assertThat(result.size(), is(0));
     }
 
     @Test
-    public void should_return_all_elements_except_last_one() {
+    public void should_select_all_elements_except_the_last() {
         List<String> result = init(stringList);
         assertThat(result.size(), is(8));
         assertThat(head(result), is("first line"));
@@ -234,13 +233,13 @@ public class SwiftListTest {
     }
 
     @Test
-    public void should_return_empty_list_if_size_of_target_list_less_than_two_for_init() {
+    public void should_select_empty_list_if_size_of_target_list_less_than_two_for_init() {
         List<String> result = init(newArrayList("first"));
         assertThat(result.size(), is(0));
     }
 
     @Test
-    public void should_return_elements_which_match_predicates() {
+    public void should_select_all_elements_which_satisfy_a_predicate() {
         List<String> result = filter(stringList, new Predicates<String>() {
             @Override
             public boolean apply(String element) {
@@ -254,7 +253,7 @@ public class SwiftListTest {
     }
 
     @Test
-    public void should_remove_elements_which_match_predicates() {
+    public void should_select_all_elements_which_do_not_satisfy_a_predicate() {
         List<String> result = filterNot(stringList, new Predicates<String>() {
             @Override
             public boolean apply(String element) {
