@@ -12,13 +12,13 @@ final class PartitionList {
     }
 
     static <E> List<List<E>> split(List<E> splitFrom, Predicates<? super E> predicates) {
-        List<List<E>> result = SwiftList.newArrayList();
-        List<E> elementList = SwiftList.newArrayList();
+        List<List<E>> result = SwiftList.arrayList();
+        List<E> elementList = SwiftList.arrayList();
 
         for (E element : splitFrom) {
             if (predicates.apply(element)) {
                 result.add(elementList);
-                elementList = SwiftList.newArrayList();
+                elementList = SwiftList.arrayList();
             } else {
                 elementList.add(element);
             }
@@ -30,7 +30,7 @@ final class PartitionList {
     }
 
     static <E> List<List<E>> partition(List<E> partitionFrom, Predicates<? super E> predicates) {
-        List<List<E>> result = SwiftList.newArrayList();
+        List<List<E>> result = SwiftList.arrayList();
         result.add(takeWhile(partitionFrom, predicates));
         result.add(dropWhile(partitionFrom, predicates));
         return result;

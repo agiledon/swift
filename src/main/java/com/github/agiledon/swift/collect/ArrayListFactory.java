@@ -10,7 +10,7 @@ final class ArrayListFactory {
     }
 
     static <E> ArrayList<E> createArrayList(E[] elements) {
-        ArrayList<E> result = SwiftList.newArrayList();
+        ArrayList<E> result = SwiftList.arrayList();
         for (E element : elements) {
             result.add(element);
         }

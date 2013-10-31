@@ -8,7 +8,7 @@ import org.junit.Test;
 import java.util.List;
 
 import static com.github.agiledon.swift.collect.SwiftIterable.foreach;
-import static com.github.agiledon.swift.collect.SwiftList.newArrayList;
+import static com.github.agiledon.swift.collect.SwiftList.arrayList;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.*;
 
@@ -17,7 +17,7 @@ public class SwiftIterableTest {
 
     @Before
     public void setUp() throws Exception {
-        stringList = newArrayList(
+        stringList = arrayList(
                 "first line",
                 "second line",
                 "///",

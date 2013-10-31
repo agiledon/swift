@@ -15,7 +15,7 @@ public class PartitionSwiftListTest {
 
     @Before
     public void setUp() throws Exception {
-        stringList = newArrayList(
+        stringList = arrayList(
                 "first line",
                 "second line",
                 "///",

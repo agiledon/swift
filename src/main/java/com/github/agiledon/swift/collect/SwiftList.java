@@ -70,11 +70,11 @@ public final class SwiftList {
         return PartitionList.partition(partitionFrom, predicates);
     }
 
-    public static <E> ArrayList<E> newArrayList() {
+    public static <E> ArrayList<E> arrayList() {
         return ArrayListFactory.createArrayList();
     }
 
-    public static <E> ArrayList<E> newArrayList(E... elements) {
+    public static <E> ArrayList<E> arrayList(E... elements) {
         return ArrayListFactory.createArrayList(elements);
     }
 

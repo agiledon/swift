@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.github.agiledon.swift.collect.SwiftList.map;
-import static com.github.agiledon.swift.collect.SwiftList.newArrayList;
+import static com.github.agiledon.swift.collect.SwiftList.arrayList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -18,7 +18,7 @@ public class TransformingSwiftListTest {
 
     @Before
     public void setUp() throws Exception {
-        intList = newArrayList(
+        intList = arrayList(
                 0,
                 1,
                 2,

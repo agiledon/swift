@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static com.github.agiledon.swift.collect.SwiftList.newArrayList;
+import static com.github.agiledon.swift.collect.SwiftList.arrayList;
 import static com.github.agiledon.swift.collect.SwiftList.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -17,7 +17,7 @@ public class SelectingSwiftListTest {
 
     @Before
     public void setUp() throws Exception {
-        stringList = newArrayList(
+        stringList = arrayList(
                 "first line",
                 "second line",
                 "///",
@@ -139,7 +139,7 @@ public class SelectingSwiftListTest {
 
     @Test(expected = ElementNotFoundException.class)
     public void should_throw_ElementNotFoundException_if_target_list_is_empty_for_head() {
-        head(newArrayList());
+        head(SwiftList.arrayList());
     }
 
     @Test
@@ -150,7 +150,7 @@ public class SelectingSwiftListTest {
 
     @Test(expected = ElementNotFoundException.class)
     public void should_throw_ElementNotFoundException_if_target_list_is_empty_for_last() {
-        last(newArrayList());
+        last(SwiftList.arrayList());
     }
 
     @Test
@@ -163,7 +163,7 @@ public class SelectingSwiftListTest {
 
     @Test
     public void should_select_empty_list_if_size_of_target_list_less_than_two_for_tail() {
-        List<String> result = tail(newArrayList("first"));
+        List<String> result = tail(arrayList("first"));
         assertThat(result.size(), is(0));
     }
 
@@ -177,7 +177,7 @@ public class SelectingSwiftListTest {
 
     @Test
     public void should_select_empty_list_if_size_of_target_list_less_than_two_for_init() {
-        List<String> result = init(newArrayList("first"));
+        List<String> result = init(arrayList("first"));
         assertThat(result.size(), is(0));
     }
 
