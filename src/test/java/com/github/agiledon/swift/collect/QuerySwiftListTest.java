@@ -1,6 +1,7 @@
 package com.github.agiledon.swift.collect;
 
 import com.github.agiledon.swift.base.Predicates;
+import com.github.agiledon.swift.exception.ElementNotFoundException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -8,6 +9,7 @@ import java.util.List;
 
 import static com.github.agiledon.swift.collect.SwiftList.arrayList;
 import static com.github.agiledon.swift.collect.SwiftList.exists;
+import static com.github.agiledon.swift.collect.SwiftList.find;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -51,5 +53,27 @@ public class QuerySwiftListTest {
         });
 
         assertThat(existed, is(false));
+    }
+
+    @Test
+    public void should_find_the_first_element_that_satisfies_a_predicate() {
+        String result = find(stringList, new Predicates<String>() {
+            @Override
+            public boolean apply(String element) {
+                return element.contains("third");
+            }
+        });
+
+        assertThat(result, is("third line"));
+    }
+
+    @Test(expected = ElementNotFoundException.class)
+    public void should_throw_Element_Not_Found_Exception_if_not_satisfy_a_predicates() {
+        find(stringList, new Predicates<String>() {
+            @Override
+            public boolean apply(String element) {
+                return element.contains("not existed");
+            }
+        });
     }
 }

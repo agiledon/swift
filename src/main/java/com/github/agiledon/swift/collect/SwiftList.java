@@ -82,6 +82,9 @@ public final class SwiftList {
         return QueryList.exists(list, predicates);
     }
 
+    public static <E> E find(List<E> list, Predicates<? super E> predicates) {
+        return QueryList.find(list, predicates);
+    }
 
     public static <E> ArrayList<E> arrayList() {
         return ArrayListFactory.createArrayList();
