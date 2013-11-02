@@ -25,4 +25,13 @@ final class QueryList {
         }
         throw new ElementNotFoundException();
     }
+
+    public static <E> boolean forall(List<E> list, Predicates<? super E> predicates) {
+        boolean result = false;
+        for (E element : list) {
+            result = predicates.apply(element);
+        }
+
+        return result;
+    }
 }

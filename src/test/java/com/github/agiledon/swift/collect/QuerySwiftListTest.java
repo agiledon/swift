@@ -7,9 +7,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static com.github.agiledon.swift.collect.SwiftList.arrayList;
-import static com.github.agiledon.swift.collect.SwiftList.exists;
-import static com.github.agiledon.swift.collect.SwiftList.find;
+import static com.github.agiledon.swift.collect.SwiftList.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -21,11 +19,11 @@ public class QuerySwiftListTest {
         stringList = arrayList(
                 "first line",
                 "second line",
-                "///",
+                "/// line",
                 "third line",
                 "fourth line",
                 "fifth line",
-                "///",
+                "/// line",
                 "sixth line",
                 "seventh line"
         );
@@ -75,5 +73,29 @@ public class QuerySwiftListTest {
                 return element.contains("not existed");
             }
         });
+    }
+
+    @Test
+    public void should_return_true_if_all_elements_satisfy_a_predicates() {
+        boolean result = forall(stringList, new Predicates<String>() {
+            @Override
+            public boolean apply(String element) {
+                return element.contains("line");
+            }
+        });
+
+        assertThat(result, is(true));
+    }
+
+    @Test
+    public void should_return_false_if_any_element_not_satisfies_a_predicates() {
+        boolean result = forall(stringList, new Predicates<String>() {
+            @Override
+            public boolean apply(String element) {
+                return element.contains("///");
+            }
+        });
+
+        assertThat(result, is(false));
     }
 }

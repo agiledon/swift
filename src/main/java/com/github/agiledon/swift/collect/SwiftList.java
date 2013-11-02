@@ -82,6 +82,10 @@ public final class SwiftList {
         return QueryList.exists(list, predicates);
     }
 
+    public static <E> boolean forall(List<E> list, Predicates<? super E> predicates) {
+        return QueryList.forall(list, predicates);
+    }
+
     public static <E> E find(List<E> list, Predicates<? super E> predicates) {
         return QueryList.find(list, predicates);
     }
