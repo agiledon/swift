@@ -4,8 +4,7 @@ import com.github.agiledon.swift.base.Predicates;
 
 import java.util.List;
 
-import static com.github.agiledon.swift.collect.SwiftList.dropWhile;
-import static com.github.agiledon.swift.collect.SwiftList.takeWhile;
+import static com.github.agiledon.swift.collect.SwiftList.*;
 
 final class PartitionList {
     private PartitionList() {
@@ -33,6 +32,13 @@ final class PartitionList {
         List<List<E>> result = SwiftList.arrayList();
         result.add(takeWhile(partitionFrom, predicates));
         result.add(dropWhile(partitionFrom, predicates));
+        return result;
+    }
+
+    public static <E> List<List<E>> splitAt(List<E> splitFrom, int at) {
+        List<List<E>> result = SwiftList.arrayList();
+        result.add(take(splitFrom, at));
+        result.add(drop(splitFrom, at));
         return result;
     }
 }

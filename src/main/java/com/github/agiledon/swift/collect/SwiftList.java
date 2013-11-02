@@ -66,8 +66,12 @@ public final class SwiftList {
         return SelectingList.filterNot(filterFrom, predicates);
     }
 
-    public static <E> List<List<E>> split(List<E> partitionFrom, Predicates<? super E> predicates) {
-        return PartitionList.split(partitionFrom, predicates);
+    public static <E> List<List<E>> split(List<E> splitFrom, Predicates<? super E> predicates) {
+        return PartitionList.split(splitFrom, predicates);
+    }
+
+    public static <E> List<List<E>> splitAt(List<E> splitFrom, final int at) {
+        return PartitionList.splitAt(splitFrom, at);
     }
 
     public static <E> List<List<E>> partition(List<E> partitionFrom, Predicates<? super E> predicates) {

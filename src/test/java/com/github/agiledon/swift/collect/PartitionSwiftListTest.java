@@ -65,4 +65,21 @@ public class PartitionSwiftListTest {
         assertThat(head(secondPart), is("///"));
         assertThat(last(secondPart), is("seventh line"));
     }
+
+    @Test
+    public void should_split_to_two_lists_according_to_start_position() {
+        List<List<String>> result = splitAt(stringList, 2);
+
+        assertThat(result.size(), is(2));
+
+        List<String> firstPart = head(result);
+        assertThat(firstPart.size(), is(2));
+        assertThat(head(firstPart), is("first line"));
+        assertThat(last(firstPart), is("second line"));
+
+        List<String> secondPart = last(result);
+        assertThat(secondPart.size(), is(7));
+        assertThat(head(secondPart), is("///"));
+        assertThat(last(secondPart), is("seventh line"));
+    }
 }
