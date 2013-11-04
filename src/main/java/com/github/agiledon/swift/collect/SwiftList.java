@@ -94,6 +94,10 @@ public final class SwiftList {
         return QueryList.find(list, predicates);
     }
 
+    public static Integer sum(List<Integer> list) {
+        return CountableList.sumForInt(list);
+    }
+
     public static <E> ArrayList<E> arrayList() {
         return ArrayListFactory.createArrayList();
     }

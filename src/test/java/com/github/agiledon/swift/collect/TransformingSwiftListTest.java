@@ -26,6 +26,7 @@ public class TransformingSwiftListTest {
                 4
         );
     }
+
     @Test
     public void should_build_a_new_list_by_applying_a_function_to_all_elements() {
         List<Integer> multiByTwo = map(intList, new Functions<Integer, Integer>() {
