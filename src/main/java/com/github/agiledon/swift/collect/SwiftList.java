@@ -6,6 +6,8 @@ import com.github.agiledon.swift.base.Predicates;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.github.agiledon.swift.collect.CountableList.sum;
+
 public final class SwiftList {
     private SwiftList() {
     }
@@ -94,8 +96,12 @@ public final class SwiftList {
         return QueryList.find(list, predicates);
     }
 
-    public static Integer sum(List<Integer> list) {
-        return CountableList.sumForInt(list);
+    public static <E extends Number> double sum(List<E> list) {
+        return CountableList.sum(list);
+    }
+
+    public static <E extends Number> double average(List<E> list) {
+        return sum(list) / list.size();
     }
 
     public static <E> ArrayList<E> arrayList() {
