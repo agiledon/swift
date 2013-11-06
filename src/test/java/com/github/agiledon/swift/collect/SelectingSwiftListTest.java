@@ -215,4 +215,40 @@ public class SelectingSwiftListTest {
         assertThat(head(result), is("///"));
         assertThat(last(result), is("///"));
     }
+
+    @Test
+    public void should_select_an_interval_of_elements() {
+        List<String> result = slice(stringList, 3, 6);
+
+        assertThat(result.size(), is(3));
+        assertThat(head(result), is("third line"));
+        assertThat(last(result), is("fifth line"));
+    }
+
+    @Test
+    public void should_swap_begin_and_end_then_select_related_elements_if_end_greater_then_begin() {
+        List<String> result = slice(stringList, 6, 3);
+
+        assertThat(result.size(), is(3));
+        assertThat(head(result), is("third line"));
+        assertThat(last(result), is("fifth line"));
+    }
+
+    @Test
+    public void should_select_last_elements_given_end_value_greater_than_size() {
+        List<String> result = slice(stringList, 3, 10);
+
+        assertThat(result.size(), is(6));
+        assertThat(head(result), is("third line"));
+        assertThat(last(result), is("seventh line"));
+    }
+
+    @Test
+    public void should_select_last_elements_given_begin_value_less_than_zero() {
+        List<String> result = slice(stringList, -1, 3);
+
+        assertThat(result.size(), is(3));
+        assertThat(head(result), is("first line"));
+        assertThat(last(result), is("///"));
+    }
 }

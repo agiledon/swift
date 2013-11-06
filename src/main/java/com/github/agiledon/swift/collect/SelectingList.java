@@ -8,7 +8,8 @@ import java.util.List;
 import static com.github.agiledon.swift.collect.SwiftList.arrayList;
 
 final class SelectingList {
-    private SelectingList() {}
+    private SelectingList() {
+    }
 
     static <E> List<E> take(List<E> list, int length) {
         List<E> result = arrayList();
@@ -144,5 +145,30 @@ final class SelectingList {
             }
         }
         return result;
+    }
+
+    static <E> List<E> slice(List<E> list, int from, int until) {
+        List<E> result = arrayList();
+        if (from > until) {
+            int temp = from;
+            from = until;
+            until = temp;
+        }
+
+        until = correctUntilValue(list, until);
+        from = correctFromValue(from);
+
+        for (int i = from; i < until; i++) {
+            result.add(list.get(i));
+        }
+        return result;
+    }
+
+    private static int correctFromValue(int from) {
+        return from < 0 ? 0 : from;
+    }
+
+    private static <E> int correctUntilValue(List<E> list, int until) {
+        return until >= list.size() ? list.size() : until;
     }
 }

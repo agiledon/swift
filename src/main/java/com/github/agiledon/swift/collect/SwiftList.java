@@ -60,6 +60,10 @@ public final class SwiftList {
         return SelectingList.init(list);
     }
 
+    public static <E> List<E> slice(List<E> list, int from, int until) {
+        return SelectingList.slice(list, from, until);
+    }
+
     public static <E> List<E> filter(List<E> filterFrom, Predicates<? super E> predicates) {
         return SelectingList.filter(filterFrom, predicates);
     }
