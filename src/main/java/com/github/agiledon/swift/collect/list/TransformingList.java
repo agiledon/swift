@@ -1,4 +1,4 @@
-package com.github.agiledon.swift.collect;
+package com.github.agiledon.swift.collect.list;
 
 import com.github.agiledon.swift.base.Functions;
 

@@ -8,7 +8,7 @@ import org.junit.Test;
 import java.util.List;
 
 import static com.github.agiledon.swift.collect.SwiftIterable.foreach;
-import static com.github.agiledon.swift.collect.SwiftList.arrayList;
+import static com.github.agiledon.swift.collect.list.SwiftList.arrayList;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.*;
 

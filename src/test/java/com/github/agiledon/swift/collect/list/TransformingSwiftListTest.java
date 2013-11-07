@@ -1,4 +1,4 @@
-package com.github.agiledon.swift.collect;
+package com.github.agiledon.swift.collect.list;
 
 import com.github.agiledon.swift.base.Functions;
 import org.junit.Before;
@@ -7,26 +7,12 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.github.agiledon.swift.collect.SwiftList.map;
-import static com.github.agiledon.swift.collect.SwiftList.arrayList;
+import static com.github.agiledon.swift.collect.list.SwiftList.map;
+import static com.github.agiledon.swift.collect.list.SwiftList.arrayList;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class TransformingSwiftListTest {
-
-    private ArrayList<Integer> intList;
-
-    @Before
-    public void setUp() throws Exception {
-        intList = arrayList(
-                0,
-                1,
-                2,
-                3,
-                4
-        );
-    }
-
+public class TransformingSwiftListTest extends SwiftListTestFixture{
     @Test
     public void should_build_a_new_list_by_applying_a_function_to_all_elements() {
         List<Integer> multiByTwo = map(intList, new Functions<Integer, Integer>() {

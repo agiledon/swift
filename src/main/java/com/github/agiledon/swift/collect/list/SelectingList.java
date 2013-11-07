@@ -1,11 +1,11 @@
-package com.github.agiledon.swift.collect;
+package com.github.agiledon.swift.collect.list;
 
 import com.github.agiledon.swift.base.Predicates;
 import com.github.agiledon.swift.exception.ElementNotFoundException;
 
 import java.util.List;
 
-import static com.github.agiledon.swift.collect.SwiftList.arrayList;
+import static com.github.agiledon.swift.collect.list.SwiftList.arrayList;
 
 final class SelectingList {
     private SelectingList() {

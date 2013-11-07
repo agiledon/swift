@@ -1,4 +1,4 @@
-package com.github.agiledon.swift.collect;
+package com.github.agiledon.swift.collect.list;
 
 import com.github.agiledon.swift.base.Predicates;
 import org.junit.Before;
@@ -6,27 +6,11 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static com.github.agiledon.swift.collect.SwiftList.*;
+import static com.github.agiledon.swift.collect.list.SwiftList.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class PartitionSwiftListTest {
-    private List<String> stringList;
-
-    @Before
-    public void setUp() throws Exception {
-        stringList = arrayList(
-                "first line",
-                "second line",
-                "///",
-                "third line",
-                "fourth line",
-                "fifth line",
-                "///",
-                "sixth line",
-                "seventh line"
-        );
-    }
+public class PartitionSwiftListTest extends SwiftListTestFixture{
 
     @Test
     public void should_split_list_to_multi_parts_according_to_a_predicate() {

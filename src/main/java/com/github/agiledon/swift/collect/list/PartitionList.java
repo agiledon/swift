@@ -1,10 +1,10 @@
-package com.github.agiledon.swift.collect;
+package com.github.agiledon.swift.collect.list;
 
 import com.github.agiledon.swift.base.Predicates;
 
 import java.util.List;
 
-import static com.github.agiledon.swift.collect.SwiftList.*;
+import static com.github.agiledon.swift.collect.list.SwiftList.*;
 
 final class PartitionList {
     private PartitionList() {

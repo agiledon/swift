@@ -1,32 +1,12 @@
-package com.github.agiledon.swift.collect;
+package com.github.agiledon.swift.collect.list;
 
-import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
-import java.util.List;
-
-import static com.github.agiledon.swift.collect.SwiftList.*;
+import static com.github.agiledon.swift.collect.list.SwiftList.copyToArray;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class ConvertingSwiftListTest {
-    private List<String> stringList;
-
-    @Before
-    public void setUp() throws Exception {
-        stringList = arrayList(
-                "first line",
-                "second line",
-                "///",
-                "third line",
-                "fourth line",
-                "fifth line",
-                "///",
-                "sixth line",
-                "seventh line"
-        );
-    }
+public class ConvertingSwiftListTest extends SwiftListTestFixture {
 
     @Test
     public void should_copy_to_array_with_specific_elements_begin_with_the_second() {

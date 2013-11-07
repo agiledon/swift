@@ -1,8 +1,8 @@
-package com.github.agiledon.swift.collect;
+package com.github.agiledon.swift.collect.list;
 
 import java.util.List;
 
-import static com.github.agiledon.swift.collect.SwiftList.take;
+import static com.github.agiledon.swift.collect.list.SwiftList.take;
 
 final class ConvertingList {
     private ConvertingList() {}

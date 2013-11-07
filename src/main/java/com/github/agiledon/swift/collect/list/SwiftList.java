@@ -1,12 +1,10 @@
-package com.github.agiledon.swift.collect;
+package com.github.agiledon.swift.collect.list;
 
 import com.github.agiledon.swift.base.Functions;
 import com.github.agiledon.swift.base.Predicates;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.github.agiledon.swift.collect.CountableList.sum;
 
 public final class SwiftList {
     private SwiftList() {
@@ -106,6 +104,14 @@ public final class SwiftList {
 
     public static <E extends Number> double average(List<E> list) {
         return sum(list) / list.size();
+    }
+
+    public static <E> String mkString(List<E> list, String before, String between, String after) {
+        return OutputList.mkString(list, before, between, after);
+    }
+
+    public static String mkString(List<String> list) {
+        return OutputList.mkString(list, "", "", "");
     }
 
     public static <E> ArrayList<E> arrayList() {

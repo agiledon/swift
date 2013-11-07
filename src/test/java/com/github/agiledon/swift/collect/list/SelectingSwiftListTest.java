@@ -1,35 +1,19 @@
-package com.github.agiledon.swift.collect;
+package com.github.agiledon.swift.collect.list;
 
 import com.github.agiledon.swift.base.Predicates;
+import com.github.agiledon.swift.collect.list.SwiftList;
 import com.github.agiledon.swift.exception.ElementNotFoundException;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
 
-import static com.github.agiledon.swift.collect.SwiftList.arrayList;
-import static com.github.agiledon.swift.collect.SwiftList.*;
+import static com.github.agiledon.swift.collect.list.SwiftList.arrayList;
+import static com.github.agiledon.swift.collect.list.SwiftList.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class SelectingSwiftListTest {
-    private List<String> stringList;
-
-    @Before
-    public void setUp() throws Exception {
-        stringList = arrayList(
-                "first line",
-                "second line",
-                "///",
-                "third line",
-                "fourth line",
-                "fifth line",
-                "///",
-                "sixth line",
-                "seventh line"
-        );
-    }
-
+public class SelectingSwiftListTest extends SwiftListTestFixture {
     @Test
     public void should_select_first_three_elements() {
         List<String> result = take(stringList, 3);

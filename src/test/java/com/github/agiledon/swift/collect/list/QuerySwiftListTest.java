@@ -1,4 +1,4 @@
-package com.github.agiledon.swift.collect;
+package com.github.agiledon.swift.collect.list;
 
 import com.github.agiledon.swift.base.Predicates;
 import com.github.agiledon.swift.exception.ElementNotFoundException;
@@ -7,28 +7,11 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static com.github.agiledon.swift.collect.SwiftList.*;
+import static com.github.agiledon.swift.collect.list.SwiftList.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class QuerySwiftListTest {
-    private List<String> stringList;
-
-    @Before
-    public void setUp() throws Exception {
-        stringList = arrayList(
-                "first line",
-                "second line",
-                "/// line",
-                "third line",
-                "fourth line",
-                "fifth line",
-                "/// line",
-                "sixth line",
-                "seventh line"
-        );
-    }
-
+public class QuerySwiftListTest extends SwiftListTestFixture {
     @Test
     public void should_be_true_if_any_element_satisfy_a_predicate() {
         boolean existed = exists(stringList, new Predicates<String>() {

@@ -1,12 +1,12 @@
-package com.github.agiledon.swift.collect;
+package com.github.agiledon.swift.collect.list;
 
 import org.junit.Test;
 
 import java.util.List;
 
-import static com.github.agiledon.swift.collect.SwiftList.arrayList;
-import static com.github.agiledon.swift.collect.SwiftList.average;
-import static com.github.agiledon.swift.collect.SwiftList.sum;
+import static com.github.agiledon.swift.collect.list.SwiftList.arrayList;
+import static com.github.agiledon.swift.collect.list.SwiftList.average;
+import static com.github.agiledon.swift.collect.list.SwiftList.sum;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
