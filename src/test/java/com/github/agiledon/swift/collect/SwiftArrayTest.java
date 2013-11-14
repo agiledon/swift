@@ -7,7 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static com.github.agiledon.swift.collect.SwiftArray.corresponds;
-import static com.github.agiledon.swift.collect.SwiftArray.foreach;
+import static com.github.agiledon.swift.collect.SwiftArray.each;
+import static com.github.agiledon.swift.collect.SwiftArray.reverseEach;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.anyString;
@@ -37,7 +38,21 @@ public class SwiftArrayTest {
     public void should_apply_an_action_to_all_elements() {
         final Printer printer = mock(Printer.class);
 
-        foreach(stringArray, new Actions<String>() {
+        each(stringArray, new Actions<String>() {
+            @Override
+            public void apply(String element) {
+                printer.print(element);
+            }
+        });
+
+        verify(printer, times(9)).print(anyString());
+    }
+
+    @Test
+    public void should_apply_an_action_to_all_elements_reversely() {
+        final Printer printer = mock(Printer.class);
+
+        reverseEach(stringArray, new Actions<String>() {
             @Override
             public void apply(String element) {
                 printer.print(element);

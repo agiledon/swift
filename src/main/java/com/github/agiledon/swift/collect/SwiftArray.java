@@ -6,9 +6,15 @@ import com.github.agiledon.swift.base.BinaryPredicates;
 public final class SwiftArray {
     private SwiftArray() {}
 
-    public static <E> void foreach(E[] array, Actions<E> action) {
+    public static <E> void each(E[] array, Actions<E> action) {
         for (E element : array) {
             action.apply(element);
+        }
+    }
+
+    public static <E> void reverseEach(E[] array, Actions<E> action) {
+        for (int i = array.length - 1; i >= 0; i--) {
+            action.apply(array[i]);
         }
     }
 
