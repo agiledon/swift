@@ -1,6 +1,7 @@
 package com.github.agiledon.swift.collect;
 
 import com.github.agiledon.swift.base.Actions;
+import com.github.agiledon.swift.base.BinaryActions;
 import com.github.agiledon.swift.base.BinaryPredicates;
 
 public final class SwiftArray {
@@ -16,6 +17,23 @@ public final class SwiftArray {
         for (int i = array.length - 1; i >= 0; i--) {
             action.apply(array[i]);
         }
+    }
+
+    public static <E> void eachWithIndex(E[] array, BinaryActions<E> action) {
+        for (int i = array.length - 1; i >= 0; i--) {
+            action.apply(array[i], i);
+        }
+    }
+
+    public static <E> void replace(final E[] array, final E from, final E to) {
+        eachWithIndex(array, new BinaryActions<E>() {
+            @Override
+            public void apply(E element, int index) {
+                if (element == from) {
+                    array[index] = to;
+                }
+            }
+        });
     }
 
     public static <E> boolean corresponds(E[] source, E[] target, BinaryPredicates<E> predicates) {

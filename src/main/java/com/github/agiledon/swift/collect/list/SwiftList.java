@@ -110,8 +110,12 @@ public final class SwiftList {
         return OutputList.mkString(list, before, between, after);
     }
 
-    public static String mkString(List<String> list) {
+    public static <E> String mkString(List<E> list) {
         return OutputList.mkString(list, "", "", "");
+    }
+
+    public static <E> String join(List<E> list) {
+        return mkString(list);
     }
 
     public static <E> ArrayList<E> arrayList() {

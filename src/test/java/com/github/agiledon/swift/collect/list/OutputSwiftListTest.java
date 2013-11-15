@@ -29,4 +29,13 @@ public class OutputSwiftListTest extends SwiftListTestFixture{
                 "third linefourth linefifth line///" +
                 "sixth lineseventh line"));
     }
+
+
+    @Test
+    public void should_join_elements_into_a_string() {
+        String result = SwiftList.join(stringList);
+        assertThat(result, is("first linesecond line///" +
+                "third linefourth linefifth line///" +
+                "sixth lineseventh line"));
+    }
 }

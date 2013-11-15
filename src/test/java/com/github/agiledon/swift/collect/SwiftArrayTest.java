@@ -1,14 +1,13 @@
 package com.github.agiledon.swift.collect;
 
 import com.github.agiledon.swift.base.Actions;
+import com.github.agiledon.swift.base.BinaryActions;
 import com.github.agiledon.swift.base.BinaryPredicates;
 import com.github.agiledon.swift.mockobject.Printer;
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.github.agiledon.swift.collect.SwiftArray.corresponds;
-import static com.github.agiledon.swift.collect.SwiftArray.each;
-import static com.github.agiledon.swift.collect.SwiftArray.reverseEach;
+import static com.github.agiledon.swift.collect.SwiftArray.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.anyString;
@@ -46,6 +45,31 @@ public class SwiftArrayTest {
         });
 
         verify(printer, times(9)).print(anyString());
+    }
+
+    @Test
+    public void should_apply_an_action_with_index_to_all_elements() {
+        final Printer printer = mock(Printer.class);
+
+        eachWithIndex(stringArray, new BinaryActions<String>() {
+            @Override
+            public void apply(String element, int index) {
+                if (stringArray[index] == element) {
+                    printer.print(String.valueOf(index));
+                }
+            }
+        });
+
+        for (int i = 0; i < stringArray.length; i++) {
+            verify(printer, times(1)).print(String.valueOf(i));
+        }
+    }
+
+    @Test
+    public void should_replace_specific_element_with_given_value() {
+        assertThat(stringArray[0], is("first line"));
+        replace(stringArray, "first line", "new line");
+        assertThat(stringArray[0], is("new line"));
     }
 
     @Test
