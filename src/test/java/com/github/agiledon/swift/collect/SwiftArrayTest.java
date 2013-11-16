@@ -73,6 +73,14 @@ public class SwiftArrayTest {
     }
 
     @Test
+    public void should_rotate_first_element_to_last_one() {
+        assertThat(stringArray[0], is("first line"));
+        rotate(stringArray);
+        assertThat(stringArray[0], is("second line"));
+        assertThat(stringArray[stringArray.length - 1], is("first line"));
+    }
+
+    @Test
     public void should_apply_an_action_to_all_elements_reversely() {
         final Printer printer = mock(Printer.class);
 

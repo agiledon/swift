@@ -5,7 +5,8 @@ import com.github.agiledon.swift.base.BinaryActions;
 import com.github.agiledon.swift.base.BinaryPredicates;
 
 public final class SwiftArray {
-    private SwiftArray() {}
+    private SwiftArray() {
+    }
 
     public static <E> void each(E[] array, Actions<E> action) {
         for (E element : array) {
@@ -36,13 +37,25 @@ public final class SwiftArray {
         });
     }
 
+    //use head and tail in the future
+    public static <E> void rotate(final E[] array) {
+        E temp = array[0];
+        for (int i = 0; i < array.length; i++) {
+            if (i < array.length - 1) {
+                array[i] = array[i + 1];
+            } else {
+                array[i] = temp;
+            }
+        }
+    }
+
     public static <E> boolean corresponds(E[] source, E[] target, BinaryPredicates<E> predicates) {
         if (source.length != target.length) {
             return false;
         }
         for (int index = 0; index < source.length; index++) {
             if (!predicates.apply(source[index], target[index])) {
-                 return false;
+                return false;
             }
         }
         return true;
