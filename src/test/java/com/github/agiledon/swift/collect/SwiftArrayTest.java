@@ -4,7 +4,6 @@ import com.github.agiledon.swift.base.Actions;
 import com.github.agiledon.swift.base.BinaryActions;
 import com.github.agiledon.swift.base.BinaryPredicates;
 import com.github.agiledon.swift.mockobject.Printer;
-import org.junit.Before;
 import org.junit.Test;
 
 import static com.github.agiledon.swift.collect.SwiftArray.*;
@@ -15,29 +14,13 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-public class SwiftArrayTest {
-    private String[] stringArray;
-
-    @Before
-    public void setUp() throws Exception {
-        stringArray = new String[]{
-                "first line",
-                "second line",
-                "///",
-                "third line",
-                "fourth line",
-                "fifth line",
-                "///",
-                "sixth line",
-                "seventh line"
-        };
-    }
+public class SwiftArrayTest extends SwiftArrayFixture {
 
     @Test
     public void should_apply_an_action_to_all_elements() {
         final Printer printer = mock(Printer.class);
 
-        each(stringArray, new Actions<String>() {
+        each(firstStringArray, new Actions<String>() {
             @Override
             public void apply(String element) {
                 printer.print(element);
@@ -51,40 +34,40 @@ public class SwiftArrayTest {
     public void should_apply_an_action_with_index_to_all_elements() {
         final Printer printer = mock(Printer.class);
 
-        eachWithIndex(stringArray, new BinaryActions<String>() {
+        eachWithIndex(firstStringArray, new BinaryActions<String>() {
             @Override
             public void apply(String element, int index) {
-                if (stringArray[index] == element) {
+                if (firstStringArray[index] == element) {
                     printer.print(String.valueOf(index));
                 }
             }
         });
 
-        for (int i = 0; i < stringArray.length; i++) {
+        for (int i = 0; i < firstStringArray.length; i++) {
             verify(printer, times(1)).print(String.valueOf(i));
         }
     }
 
     @Test
     public void should_replace_specific_element_with_given_value() {
-        assertThat(stringArray[0], is("first line"));
-        replace(stringArray, "first line", "new line");
-        assertThat(stringArray[0], is("new line"));
+        assertThat(firstStringArray[0], is("first line"));
+        replace(firstStringArray, "first line", "new line");
+        assertThat(firstStringArray[0], is("new line"));
     }
 
     @Test
     public void should_rotate_first_element_to_last_one() {
-        assertThat(stringArray[0], is("first line"));
-        rotate(stringArray);
-        assertThat(stringArray[0], is("second line"));
-        assertThat(stringArray[stringArray.length - 1], is("first line"));
+        assertThat(firstStringArray[0], is("first line"));
+        rotate(firstStringArray);
+        assertThat(firstStringArray[0], is("second line"));
+        assertThat(firstStringArray[firstStringArray.length - 1], is("first line"));
     }
 
     @Test
     public void should_apply_an_action_to_all_elements_reversely() {
         final Printer printer = mock(Printer.class);
 
-        reverseEach(stringArray, new Actions<String>() {
+        reverseEach(firstStringArray, new Actions<String>() {
             @Override
             public void apply(String element) {
                 printer.print(element);
@@ -107,5 +90,15 @@ public class SwiftArrayTest {
         });
 
         assertThat(result, is(true));
+    }
+
+    @Test
+    public void should_concat_two_arrays_to_one() {
+        String[] result = concat(firstStringArray, secondStringArray);
+        assertThat(result.length, is(11));
+        assertThat(result[0], is("first line"));
+        assertThat(result[8], is("seventh line"));
+        assertThat(result[10], is("nine line"));
+
     }
 }

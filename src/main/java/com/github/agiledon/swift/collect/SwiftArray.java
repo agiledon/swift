@@ -49,6 +49,21 @@ public final class SwiftArray {
         }
     }
 
+    @SuppressWarnings("unchecked")
+    public static <E> E[] concat(E[] firstArray, E[] secondArray) {
+        E[] resultArray = (E[]) java.lang.reflect.Array.newInstance(
+                firstArray[0].getClass(), firstArray.length + secondArray.length);
+
+        for (int i = 0; i < firstArray.length; i++) {
+            resultArray[i] = firstArray[i];
+        }
+
+        for (int j = 0; j < secondArray.length; j++) {
+            resultArray[firstArray.length + j] = secondArray[j];
+        }
+        return resultArray;
+    }
+
     public static <E> boolean corresponds(E[] source, E[] target, BinaryPredicates<E> predicates) {
         if (source.length != target.length) {
             return false;
