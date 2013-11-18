@@ -90,16 +90,16 @@ final class SelectingList {
     }
 
     static <E> E head(List<E> list) {
-        throwExceptionIfOneElement(list);
+        throwExceptionIfEmptyElement(list);
         return list.get(0);
     }
 
     static <E> E last(List<E> list) {
-        throwExceptionIfOneElement(list);
+        throwExceptionIfEmptyElement(list);
         return list.get(list.size() - 1);
     }
 
-    private static <E> void throwExceptionIfOneElement(List<E> list) {
+    private static <E> void throwExceptionIfEmptyElement(List<E> list) {
         if (list.size() < 1) {
             throw new ElementNotFoundException();
         }

@@ -57,10 +57,9 @@ public class SwiftArrayTest extends SwiftArrayFixture {
 
     @Test
     public void should_rotate_first_element_to_last_one() {
-        assertThat(firstStringArray[0], is("first line"));
-        rotate(firstStringArray);
-        assertThat(firstStringArray[0], is("second line"));
-        assertThat(firstStringArray[firstStringArray.length - 1], is("first line"));
+        String[] result = rotate(firstStringArray);
+        assertThat(result[0], is("second line"));
+        assertThat(result[result.length - 1], is("first line"));
     }
 
     @Test
@@ -102,7 +101,15 @@ public class SwiftArrayTest extends SwiftArrayFixture {
     }
 
     @Test
-    public void should_return_first_element() {
+    public void should_select_the_first_element() {
         assertThat(head(firstStringArray), is("first line"));
+    }
+
+    @Test
+    public void should_select_all_elements_except_the_first() {
+        String[] result = tail(firstStringArray);
+        assertThat(result.length, is(firstStringArray.length - 1));
+        assertThat(result[0], is("second line"));
+        assertThat(result[result.length - 1], is("seventh line"));
     }
 }
