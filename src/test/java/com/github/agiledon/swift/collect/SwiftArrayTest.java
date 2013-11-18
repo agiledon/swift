@@ -99,6 +99,10 @@ public class SwiftArrayTest extends SwiftArrayFixture {
         assertThat(result[0], is("first line"));
         assertThat(result[8], is("seventh line"));
         assertThat(result[10], is("nine line"));
+    }
 
+    @Test
+    public void should_return_first_element() {
+        assertThat(head(firstStringArray), is("first line"));
     }
 }

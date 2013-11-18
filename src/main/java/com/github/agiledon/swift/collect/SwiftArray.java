@@ -49,6 +49,10 @@ public final class SwiftArray {
         }
     }
 
+    public static <E> E head(E[] array) {
+        return array[0];
+    }
+
     @SuppressWarnings("unchecked")
     public static <E> E[] concat(E[] firstArray, E[] secondArray) {
         E[] resultArray = (E[]) java.lang.reflect.Array.newInstance(
