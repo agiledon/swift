@@ -235,4 +235,11 @@ public class SelectingSwiftListTest extends SwiftListTestFixture {
         assertThat(head(result), is("first line"));
         assertThat(last(result), is("///"));
     }
+
+    @Test
+    public void should_de_duplication_for_list() {
+        List<String> result = distinct(stringList);
+        assertThat(result.size(), is(8));
+        assertThat(result.get(6), is("sixth line"));
+    }
 }

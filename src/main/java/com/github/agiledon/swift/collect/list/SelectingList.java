@@ -1,11 +1,14 @@
 package com.github.agiledon.swift.collect.list;
 
+import com.github.agiledon.swift.base.Functions;
 import com.github.agiledon.swift.base.Predicates;
 import com.github.agiledon.swift.exception.ElementNotFoundException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.github.agiledon.swift.collect.list.SwiftList.arrayList;
+import static com.github.agiledon.swift.collect.list.SwiftList.map;
 
 final class SelectingList {
     private SelectingList() {
@@ -160,6 +163,16 @@ final class SelectingList {
 
         for (int i = from; i < until; i++) {
             result.add(list.get(i));
+        }
+        return result;
+    }
+
+    static <E> List<E> distinct(List<E> list) {
+        List<E> result = arrayList();
+        for (E element : list) {
+            if (!result.contains(element)) {
+                result.add(element);
+            }
         }
         return result;
     }

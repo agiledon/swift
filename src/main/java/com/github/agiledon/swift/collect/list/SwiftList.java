@@ -14,6 +14,10 @@ public final class SwiftList {
         return TransformingList.transform(list, function);
     }
 
+    public static <E> List<E> distinct(List<E> list) {
+        return SelectingList.distinct(list);
+    }
+
     public static <E> List<E> take(List<E> list, int length) {
         return SelectingList.take(list, length);
     }
