@@ -59,6 +59,14 @@ public final class SwiftArray {
         return result;
     }
 
+    public static <E> E[] reverse(E[] array) {
+        E[] result = newArray(array, array.length);
+        for (int i = array.length - 1; i >= 0; i--) {
+            result[array.length -1 - i] = array[i];
+        }
+        return result;
+    }
+
     public static <E> E[] concat(E[] firstArray, E[] secondArray) {
         E[] resultArray = newArray(firstArray, firstArray.length + secondArray.length);
 

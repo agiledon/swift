@@ -112,4 +112,12 @@ public class SwiftArrayTest extends SwiftArrayFixture {
         assertThat(result[0], is("second line"));
         assertThat(result[result.length - 1], is("seventh line"));
     }
+
+    @Test
+    public void should_reverse_all_elements() {
+        String[] result = reverse(firstStringArray);
+        assertThat(result.length, is(firstStringArray.length));
+        assertThat(result[0], is("seventh line"));
+        assertThat(result[8], is("first line"));
+    }
 }
