@@ -120,4 +120,24 @@ public class SwiftArrayTest extends SwiftArrayFixture {
         assertThat(result[0], is("seventh line"));
         assertThat(result[8], is("first line"));
     }
+
+    @Test
+    public void should_de_duplication_for_array() {
+        String[] result = distinct(firstStringArray);
+
+        assertThat(result.length, is(8));
+        assertThat(result[6], is("sixth line"));
+    }
+
+    @Test
+    public void should_return_true_if_array_contains_given_element() {
+        boolean result = contains(firstStringArray, "second line");
+        assertThat(result, is(true));
+    }
+
+    @Test
+    public void should_return_false_if_array_does_not_contains_given_element() {
+        boolean result = contains(firstStringArray, "no line");
+        assertThat(result, is(false));
+    }
 }

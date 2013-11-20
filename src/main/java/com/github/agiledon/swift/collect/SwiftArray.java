@@ -4,7 +4,10 @@ import com.github.agiledon.swift.base.Actions;
 import com.github.agiledon.swift.base.BinaryActions;
 import com.github.agiledon.swift.base.BinaryPredicates;
 
-import java.lang.reflect.Array;
+import java.util.List;
+
+import static com.github.agiledon.swift.collect.list.SwiftList.arrayList;
+import static com.github.agiledon.swift.collect.list.SwiftList.copyToArray;
 
 public final class SwiftArray {
     private SwiftArray() {
@@ -80,18 +83,23 @@ public final class SwiftArray {
         return resultArray;
     }
 
-    @SuppressWarnings("unchecked")
-    private static <E> E[] newArray(E[] array, int length) {
-        return (E[]) java.lang.reflect.Array.newInstance(
-                array[0].getClass(), length);
+    public static <E> boolean contains(E[] array, E targetElement) {
+        for (E element : array) {
+            if (element.equals(targetElement)) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    private static <E> E[] arrayWith(E... elements) {
-        E[] result = newArray(elements, elements.length);
-        for (int i = 0; i < elements.length; i++) {
-            result[i] = elements[i];
+    public static <E> E[] distinct(E[] array) {
+        List<E> resultList = arrayList();
+        for (E element : array) {
+            if (!resultList.contains(element)) {
+                resultList.add(element);
+            }
         }
-        return result;
+        return copyToArray(resultList);
     }
 
     public static <E> boolean corresponds(E[] source, E[] target, BinaryPredicates<E> predicates) {
@@ -104,5 +112,19 @@ public final class SwiftArray {
             }
         }
         return true;
+    }
+
+    @SuppressWarnings("unchecked")
+    private static <E> E[] newArray(E[] array, int length) {
+        return (E[]) java.lang.reflect.Array.newInstance(
+                array[0].getClass(), length);
+    }
+
+    private static <E> E[] arrayWith(E... elements) {
+        E[] result = newArray(elements, elements.length);
+        for (int i = 0; i < elements.length; i++) {
+            result[i] = elements[i];
+        }
+        return result;
     }
 }

@@ -90,6 +90,10 @@ public final class SwiftList {
         return ConvertingList.copyToArray(list, start, length);
     }
 
+    public static <E> E[] copyToArray(List<E> list) {
+        return ConvertingList.copyToArray(list, 1, list.size());
+    }
+
     public static <E> boolean exists(List<E> list, Predicates<? super E> predicates) {
         return QueryList.exists(list, predicates);
     }
